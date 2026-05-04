@@ -1,7 +1,7 @@
 ---
 title: API Reference
 sidebar_position: 5
-description: Интерактивная документация REST API сервиса RTPS
+description: OpenAPI сервиса RTPS
 hide_table_of_contents: true
 ---
 
