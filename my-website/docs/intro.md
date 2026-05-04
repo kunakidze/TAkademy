@@ -1,7 +1,7 @@
 ---
-title: RussiaRoutes
+title: Russian Travel Planning System (RTPS)
 sidebar_position: 1
-description: Карточка сервиса RussiaRoutes — платформа для планирования путешествий по России с официальными и авторскими маршрутами, офлайн-доступом и модерацией ТИЦ
+description: Карточка сервиса RTPS — платформа для планирования путешествий по России с официальными и авторскими маршрутами, офлайн-доступом и модерацией ТИЦ
 ---
 
 :::info Карточка сервиса
@@ -69,6 +69,6 @@ description: Карточка сервиса RussiaRoutes — платформа
 ## Быстрый старт
 
 - [Архитектура системы](./architecture/arch) — описание архитектуры
-- [API Reference](./api/api-reference) — спецификации OpenAPI и AsyncAPI
-- [Модель данных](./db/data-model) — объектная модель: маршруты, пользователи, достопримечательности
-- [Сценарии использования](./scenarios/scenario1) — «Найти маршрут по региону» (UML Use Case, Sequence, BPMN)
+- [API Reference](./API/API) — спецификации OpenAPI и AsyncAPI
+- [Модель данных](./Data Base/DB) — объектная модель
+- [Сценарии использования](./Scenario/Scenario) — «Найти маршрут по региону» (UML Use Case, Sequence, BPMN)
