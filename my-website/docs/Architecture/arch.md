@@ -1,8 +1,11 @@
 ---
 title: Архитектура системы
-sidebar_position: 2
+sidebar_position: 3
 description: Архитектура платформы RussiaRoutes — BPMN, DMN, Sequence и описание процессов
 ---
+
+import Drawio from '@theme/Drawio'
+import diagram from '!!raw-loader!./BPMN.drawio';
 
 # Архитектура системы
 
@@ -12,7 +15,7 @@ description: Архитектура платформы RussiaRoutes — BPMN, DM
 
 Диаграмма бизнес-процесса построена в нотации BPMN 2.0 и отражает полный цикл поиска маршрутов: от ввода поискового запроса до отображения результатов с учётом контекстных рекомендаций и обработки ошибок.
 
-![BPMN диаграмма процесса "Найти маршрут по региону"](./BPMN.drawio)
+<Drawio content={diagram} editable={false} />
 
 > **Примечание:** Для корректного отображения диаграммы необходимо установить плагин для просмотра `.drawio` файлов в Docusaurus (например, `docusaurus-plugin-drawio`).
 
@@ -82,12 +85,5 @@ opt
         s --> t : Временная ошибка.\nПовторите позже.
     end
 end
-
 @enduml
-
-## Связь с другими артефактами
-
-- **Use Case Diagram** – общая диаграмма вариантов использования для MVP (см. [рисунок 1 в PDF](./path-to-pdf#page=16) или в оригинальной документации).
-- **Event Storming** – доска доступна по [ссылке](https://unidraw.io/app/board/d1fad0582f156c68c83a).
-- **OpenAPI спецификация** – детальное описание эндпоинтов `/regions`, `/routes`, `/attractions` находится в разделе [API Reference](../api/api-reference.md).
-- **Модель данных (ERD)** – описана в разделе [Модель данных](../db/data-model.md), включает сущности `Route`, `User`, `Attraction`.
+```

@@ -18,17 +18,6 @@ const config = {
 
   plugins: [
     ['drawio', {}],
-    // Второй docs instance для Style Guide
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'style-guide',
-        path: 'style-guide',
-        routeBasePath: 'style-guide',
-        sidebarPath: require.resolve('./sidebars-style-guide.js'),
-        remarkPlugins: [simplePlantUML],
-      },
-    ],
   ],
 
   presets: [
@@ -122,10 +111,6 @@ const config = {
           {
             title: 'Для авторов',
             items: [
-              {
-                label: 'Style Guide',
-                to: '/style-guide/',
-              },
               {
                 label: 'Репозиторий',
                 href: 'https://github.com//kunakidze/T-Akademy',

@@ -68,7 +68,7 @@ description: Карточка сервиса RTPS — платформа для 
 
 ## Быстрый старт
 
-- [Архитектура системы](./architecture/arch) — описание архитектуры
-- [API Reference](./API/API) — спецификации OpenAPI и AsyncAPI
-- [Модель данных](./Data Base/DB) — объектная модель
-- [Сценарии использования](./Scenario/Scenario) — «Найти маршрут по региону» (UML Use Case, Sequence, BPMN)
+- [Архитектура системы](./architecture/arch) — описание архитектуры (в т.ч. BPMN и Sequence)
+- [API Reference](./API/API.md) — спецификация OpenAPI
+- [Модель данных](./DataBase/DB.md) — объектная модель
+- [Сценарии использования](./Scenario/Scenario.md) — cценарии использвования системы

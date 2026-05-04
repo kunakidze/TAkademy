@@ -1,0 +1,390 @@
+openapi: 3.0.3
+info:
+  title: Russia Regions Travel Planning (RRTP) - OpenAPI 3.0
+  version: 1.0.0
+servers:
+  - url: https://rrtp.ru
+security:
+  - BearerAuth: []
+tags:
+  - name: Regions
+  - name: Routes
+  - name: Attractions
+paths:
+  /regions:
+    get:
+      tags:
+        - Regions
+      summary: Получить список всех регионов
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Region'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /regions/{regionId}/routes:
+    get:
+      tags:
+        - Routes
+      summary: Получить список маршрутов региона
+      parameters:
+        - name: regionId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [hiking, cycling, auto, water]
+        - name: difficulty
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [easy, medium, hard]
+        - name: min_length
+          in: query
+          required: false
+          schema:
+            type: number
+            minimum: 0
+        - name: max_length
+          in: query
+          required: false
+          schema:
+            type: number
+            minimum: 0
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [routeDuration, routeDifficulty, routeName]
+            default: routeName
+        - name: order
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /routes/{routeId}:
+    get:
+      tags:
+        - Routes
+      summary: Получить детальную информацию о маршруте
+      parameters:
+        - name: routeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /attractions/{attractionId}:
+    get:
+      tags:
+        - Attractions
+      summary: Получить информацию о достопримечательности
+      parameters:
+        - name: attractionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attraction'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+        - code
+        - message
+
+    Region:
+      type: object
+      properties:
+        regionId:
+          type: integer
+        regionName:
+          type: string
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoutePreview'
+      required:
+        - regionId
+        - regionName
+
+    RoutePreview:
+      type: object
+      properties:
+        routeId:
+          type: integer
+        routeName:
+          type: string
+        routeType:
+          type: string
+          enum: [hiking, cycling, auto, water]
+        routeDifficulty:
+          type: string
+          enum: [easy, medium, hard]
+        routeDuration:
+          type: string
+          enum: [short, medium, long]
+        firstPhoto:
+          type: string
+          format: uri
+        attractions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttractionPreview'
+      required:
+        - routeId
+        - routeName
+
+    AttractionPreview:
+      type: object
+      properties:
+        attractionId:
+          type: integer
+        attractionName:
+          type: string
+      required:
+        - attractionId
+        - attractionName
+
+    RegionRef:
+      type: object
+      properties:
+        regionId:
+          type: integer
+        regionName:
+          type: string
+      required:
+        - regionId
+        - regionName
+
+    Route:
+      type: object
+      properties:
+        routeId:
+          type: integer
+        routeName:
+          type: string
+        region:
+          $ref: '#/components/schemas/RegionRef'
+        routeType:
+          type: string
+          enum: [hiking, cycling, auto, water]
+        routeDifficulty:
+          type: string
+          enum: [easy, medium, hard]
+        routeDuration:
+          type: string
+          enum: [short, medium, long]
+        routeDescription:
+          type: string
+        startLocation:
+          $ref: '#/components/schemas/GeoPoint'
+        endLocation:
+          $ref: '#/components/schemas/GeoPoint'
+        photos:
+          type: array
+          items:
+            type: string
+            format: uri
+        attractions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttractionRef'
+      required:
+        - routeId
+        - routeName
+        - region
+        - routeType
+        - routeDifficulty
+        - routeDuration
+
+    AttractionRef:
+      type: object
+      properties:
+        attractionId:
+          type: integer
+        attractionName:
+          type: string
+      required:
+        - attractionId
+        - attractionName
+
+    Attraction:
+      type: object
+      properties:
+        attractionId:
+          type: integer
+        attractionName:
+          type: string
+        attractionDescription:
+          type: string
+        attractionType:
+          type: string
+          enum: [museum, park, monument, natural, other]
+        schedule:
+          type: object
+          properties:
+            ПН:
+              type: string
+            ВТ:
+              type: string
+            СР:
+              type: string
+            ЧТ:
+              type: string
+            ПТ:
+              type: string
+            СБ:
+              type: string
+            ВС:
+              type: string
+        region:
+          $ref: '#/components/schemas/RegionRef'
+        location:
+          $ref: '#/components/schemas/GeoPoint'
+        photos:
+          type: array
+          items:
+            type: string
+            format: uri
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteRef'
+      required:
+        - attractionId
+        - attractionName
+        - location
+
+    RouteRef:
+      type: object
+      properties:
+        routeId:
+          type: integer
+        routeName:
+          type: string
+      required:
+        - routeId
+        - routeName
+
+    GeoPoint:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: double
+        lon:
+          type: number
+          format: double
+      required:
+        - lat
+        - lon
+
+  responses:
+    BadRequestError:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnauthorizedError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ForbiddenError:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
