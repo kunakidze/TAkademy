@@ -1,7 +1,7 @@
 ---
 title: Архитектура системы
 sidebar_position: 3
-description: Архитектура платформы RussiaRoutes — BPMN, DMN, Sequence и описание процессов
+description: Архитектура RTPS — BPMN, DMN, Sequence
 ---
 
 import Drawio from '@theme/Drawio'

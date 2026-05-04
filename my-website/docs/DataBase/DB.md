@@ -1,7 +1,7 @@
 ---
 title: Модель данных
 sidebar_position: 4
-description: Объектная модель данных платформы RTPS — сущности, атрибуты, связи и выбор СУБД
+description: Объектная модель данных RTPS — сущности, атрибуты, связи и выбор СУБД
 ---
 
 import Drawio from '@theme/Drawio'

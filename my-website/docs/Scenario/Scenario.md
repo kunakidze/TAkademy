@@ -1,7 +1,7 @@
 ---
 title: Сценарии использования
 sidebar_position: 2
-description: Диаграмма вариантов использования и детальные сценарии для платформы RTPS
+description: Диаграмма вариантов использования RTPS
 ---
 
 import Drawio from '@theme/Drawio'
