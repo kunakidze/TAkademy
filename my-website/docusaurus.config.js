@@ -59,7 +59,7 @@ const config = {
     ({
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'HeroTask',
+        title: 'RTPS',
         logo: {
           alt: 'RTPS Logo',
           src: 'img/logo.svg',
@@ -72,17 +72,7 @@ const config = {
             label: 'Документация',
           },
           {
-            to: '/docs/api/RTPS',
-            label: 'API',
-            position: 'left',
-          },
-          {
-            to: '/style-guide/',
-            label: 'Style Guide',
-            position: 'left',
-          },
-          {
-            href: 'https://github.com//kunakidze/T-Akademy',
+            href: 'https://github.com//kunakidze/TAkademy',
             label: 'GitHub',
             position: 'right',
           },
@@ -98,14 +88,6 @@ const config = {
                 label: 'Карточка сервиса',
                 to: '/docs/intro',
               },
-              {
-                label: 'Архитектура',
-                to: '/docs/arch',
-              },
-              {
-                label: 'API Reference',
-                to: '/docs/api/RTPS',
-              },
             ],
           },
           {
@@ -113,7 +95,7 @@ const config = {
             items: [
               {
                 label: 'Репозиторий',
-                href: 'https://github.com//kunakidze/T-Akademy',
+                href: 'https://github.com//kunakidze/TAkademy',
               },
             ],
           },
